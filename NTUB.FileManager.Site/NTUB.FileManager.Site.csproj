@@ -135,6 +135,9 @@
     <Compile Include="Models\EFModels\AppDbContext.cs" />
     <Compile Include="Models\EFModels\Doc.cs" />
     <Compile Include="Models\Entities\DocEntity.cs" />
+    <Compile Include="Models\Infrastructures\ExtMethods\DocEntityExts.cs" />
+    <Compile Include="Models\Infrastructures\ExtMethods\DocExts.cs" />
+    <Compile Include="Models\Infrastructures\Repositories\DocRepository.cs" />
     <Compile Include="Models\Interfaces\IDocRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

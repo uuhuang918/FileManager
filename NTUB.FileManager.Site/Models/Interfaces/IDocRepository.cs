@@ -11,7 +11,7 @@ namespace NTUB.FileManager.Site.Models.Interfaces
 	{
 		void Create(DocEntity entity);
 		void Update(DocEntity entity);
-		void Delete(DocEntity entity);
+		void Delete(int docId));
 		IEnumerable<DocEntity> Search(string title, string description);
 		DocEntity Load(int docId);
 	}
