@@ -13,6 +13,6 @@ namespace NTUB.FileManager.Site.Models.Interfaces
 		void Update(DocEntity entity);
 		void Delete(DocEntity entity);
 		IEnumerable<DocEntity> Search(string title, string description);
-		DocEntity Load(int dosId);
+		DocEntity Load(int docId);
 	}
 }
