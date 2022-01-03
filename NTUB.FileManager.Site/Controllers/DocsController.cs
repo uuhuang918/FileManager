@@ -1,4 +1,5 @@
-﻿using NTUB.FileManager.Site.Models.Infrastructures.ExtMethods;
+﻿using NTUB.FileManager.Site.Models.DTOs;
+using NTUB.FileManager.Site.Models.Infrastructures.ExtMethods;
 using NTUB.FileManager.Site.Models.Infrastructures.Repositories;
 using NTUB.FileManager.Site.Models.Interfaces;
 using NTUB.FileManager.Site.Models.Services;
@@ -40,12 +41,33 @@ namespace NTUB.FileManager.Site.Controllers
         public ActionResult Create(DocCreateVM model, HttpPostedFileBase file)
         {
             //檢查有沒有上傳檔案(必填)
+            if(file==null || file.FileName==null || file.ContentLength==0)
+			{
+                ModelState.AddModelError("FileName", "檔案必填");
+                return View(model);
+			}
             //將檔案儲存，得知實際存的檔名
+            string path =Server.MapPath("~/Files/");
+            string newFileName = SaveFile(file, path);
             //將新增名存到model
+            model.FileName = newFileName;
             //新增紀錄
+            service.Create(model.ToRequest());
             //redirect to index
-            return View(model);
+            return RedirectToAction("Index");
         }
 
+        private string SaveFile(HttpPostedFileBase file,string path)
+		{
+            string ext=System.IO.Path.GetExtension(file.FileName);
+
+            string targetFileName=Guid.NewGuid().ToString("N")+ ext;
+
+            string fullName=System.IO.Path.Combine(path,targetFileName);
+
+            file.SaveAs(fullName);
+            return targetFileName;
+
+		}
     }
 }

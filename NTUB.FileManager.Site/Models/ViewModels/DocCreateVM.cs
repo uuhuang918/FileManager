@@ -44,7 +44,7 @@ namespace NTUB.FileManager.Site.Models.ViewModels
 		public string Description { get; set; }
 
 		[Display(Name = "異動日期")]
-		[DisplayFormat(ApplyFormatInEditMode =false,DataFormatString ="{0:yyyy/mm/dd HH:mm:ss}")]
+		[DisplayFormat(ApplyFormatInEditMode =false,DataFormatString ="{0:yyyy/MM/dd HH:mm:ss}")]
 		public DateTime ModifiedTime { get; set; }
 
 		[Display(Name = "描述")]
