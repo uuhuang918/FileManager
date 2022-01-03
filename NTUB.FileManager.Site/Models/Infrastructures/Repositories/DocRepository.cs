@@ -38,7 +38,18 @@ namespace NTUB.FileManager.Site.Models.Infrastructures.Repositories
 
 		public IEnumerable<DocEntity> Search(string title, string description)
 		{
-			throw new NotImplementedException();
+			var query =db.Docs.AsQueryable();
+			if(!string.IsNullOrEmpty(title))
+			{
+				query=query.Where(x => x.Title.Contains(title));
+			}
+			if(!string.IsNullOrEmpty(description))
+			{
+				query=query.Where(x=>x.Description.Contains(description));
+			}
+			var data=query.OrderBy(x=>x.Title).ToList();
+			var result = data.Select(x => x.ToEntity());
+			return result;
 		}
 
 		public void Update(DocEntity entity)

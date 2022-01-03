@@ -9,7 +9,7 @@ namespace NTUB.FileManager.Site.Models.EFModels
     public partial class Doc
     {
         public int Id { get; set; }
-
+        
         [Required]
         [StringLength(30)]
         public string Title { get; set; }

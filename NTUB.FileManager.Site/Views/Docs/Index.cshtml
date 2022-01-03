@@ -1,0 +1,62 @@
+﻿@model IEnumerable<NTUB.FileManager.Site.Models.ViewModels.DocIndexVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<form class="form-inline" action="" method="get">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                標題: <input type="text" name="title" class="form-control" value="">
+                描述: <input type="text" name="description" class="form-control" value="">
+                   <input type="submit" value="查詢" class=" btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+   
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BriefDescription)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BriefDescription)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
