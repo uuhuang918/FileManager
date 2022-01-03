@@ -26,6 +26,10 @@ namespace NTUB.FileManager.Site.Controllers
             var data = repository
                 .Search(title, description)
                 .Select(x => x.ToIndexVM());
+            
+            ViewBag.C_Title=title;
+            ViewBag.C_Description=description;
+
             return View(data);
         }
         public ActionResult Create()
