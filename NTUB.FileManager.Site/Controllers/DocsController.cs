@@ -57,6 +57,29 @@ namespace NTUB.FileManager.Site.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Edit (int id)
+		{
+            var entity =repository.Load(id);
+            return View(entity.ToEditVM());
+		}
+
+        [HttpPost]
+        public ActionResult Edit(DocEditVM model, HttpPostedFileBase file)
+		{
+            if (ModelState.IsValid==false) return View(model);
+
+            string path = Server.MapPath("~/Files/");
+            string newFileName = TrySaveFile(file, path);
+
+            string origFileName = repository.Load(model.Id).FileName;
+            model.FileName = string.IsNullOrEmpty(newFileName) ? origFileName : newFileName;
+
+            service.Update(model.ToRequest());
+            TryDeleteFile(path, origFileName);
+            return RedirectToAction("Index");
+
+		}
+
         private string SaveFile(HttpPostedFileBase file,string path)
 		{
             string ext=System.IO.Path.GetExtension(file.FileName);

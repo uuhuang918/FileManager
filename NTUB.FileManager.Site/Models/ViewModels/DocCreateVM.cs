@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NTUB.FileManager.Site.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -34,6 +35,22 @@ namespace NTUB.FileManager.Site.Models.ViewModels
 		[MaxLength(60)]
 		public string Description { get; set; }
 		public string FileName { get; set; }
+		
+	}
+
+	public static class DocEntityExts
+	{
+		public static DocEditVM ToEditVM(this DocEntity source)
+		{
+			return new DocEditVM
+			{
+				Id = source.Id,
+				Title = source.Title,
+				Description = source.Description,
+				FileName = source.FileName,
+
+			};
+		}
 	}
 
 	public	class DocIndexVM
