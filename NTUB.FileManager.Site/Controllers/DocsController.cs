@@ -37,8 +37,13 @@ namespace NTUB.FileManager.Site.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(DocCreateVM model)
+        public ActionResult Create(DocCreateVM model, HttpPostedFileBase file)
         {
+            //檢查有沒有上傳檔案(必填)
+            //將檔案儲存，得知實際存的檔名
+            //將新增名存到model
+            //新增紀錄
+            //redirect to index
             return View(model);
         }
 
