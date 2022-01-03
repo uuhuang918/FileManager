@@ -33,6 +33,7 @@ namespace NTUB.FileManager.Site.Models.ViewModels
 		[Display(Name = "描述")]
 		[MaxLength(60)]
 		public string Description { get; set; }
+		public string FileName { get; set; }
 	}
 
 	public	class DocIndexVM
