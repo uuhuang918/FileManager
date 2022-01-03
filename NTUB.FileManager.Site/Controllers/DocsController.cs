@@ -69,7 +69,7 @@ namespace NTUB.FileManager.Site.Controllers
             if (ModelState.IsValid==false) return View(model);
 
             string path = Server.MapPath("~/Files/");
-            string newFileName = TrySaveFile(file, path);
+            string newFileName = TrySaveFile(path,file);
 
             string origFileName = repository.Load(model.Id).FileName;
             model.FileName = string.IsNullOrEmpty(newFileName) ? origFileName : newFileName;
@@ -79,7 +79,26 @@ namespace NTUB.FileManager.Site.Controllers
             return RedirectToAction("Index");
 
 		}
+        private void TryDeleteFile(string path,string fileName)
+		{
+             string fullName=System.IO.Path.Combine(path,fileName);
+            if (System.IO.File.Exists(fullName) == false) return;
+            
+            System.IO.File.Delete(fullName);
+		}
+        private string TrySaveFile(string path, HttpPostedFileBase file)
+        {
+            if (file == null || file.FileName == null || file.ContentLength == 0) return String.Empty;
+            string ext = System.IO.Path.GetExtension(file.FileName);
 
+            string targetFileName = Guid.NewGuid().ToString("N") + ext;
+
+            string fullName = System.IO.Path.Combine(path, targetFileName);
+
+            file.SaveAs(fullName);
+            return targetFileName;
+
+        }
         private string SaveFile(HttpPostedFileBase file,string path)
 		{
             string ext=System.IO.Path.GetExtension(file.FileName);

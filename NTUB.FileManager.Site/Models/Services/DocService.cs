@@ -38,6 +38,7 @@ namespace NTUB.FileManager.Site.Models.Services
 
 			entity.Title = request.Title;
 			entity.Description = request.Description;
+			entity.FileName = request.FileName;
 			entity.ModifiedTime = DateTime.Now;
 			_repo.Update(entity);
 		}
