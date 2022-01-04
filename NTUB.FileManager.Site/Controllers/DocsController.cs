@@ -64,14 +64,20 @@ namespace NTUB.FileManager.Site.Controllers
 		}
 
         [HttpPost]
-        public ActionResult Edit(DocEditVM model, HttpPostedFileBase file)
+        public ActionResult Edit(DocEditVM model, HttpPostedFileBase file,string btnDelete)
 		{
+            string origFileName = repository.Load(model.Id).FileName;
+            if(string.IsNullOrEmpty(btnDelete)==false)
+           // if (btnDelete=="Delete")
+			{
+                return Delete(model,origFileName);
+			}
             if (ModelState.IsValid==false) return View(model);
 
             string path = Server.MapPath("~/Files/");
             string newFileName = TrySaveFile(path,file);
 
-            string origFileName = repository.Load(model.Id).FileName;
+            
             model.FileName = string.IsNullOrEmpty(newFileName) ? origFileName : newFileName;
 
             service.Update(model.ToRequest());
@@ -79,6 +85,26 @@ namespace NTUB.FileManager.Site.Controllers
             return RedirectToAction("Index");
 
 		}
+
+        private ActionResult Delete(DocEditVM model, string fileName)
+        {
+            try
+            {
+                this.service.Delete(model.Id);
+                string path = Server.MapPath("~/Files/");
+                TryDeleteFile(path, fileName);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return this.View("Edit", model);
+            }
+        }
+
+
+
         private void TryDeleteFile(string path,string fileName)
 		{
              string fullName=System.IO.Path.Combine(path,fileName);
@@ -111,5 +137,9 @@ namespace NTUB.FileManager.Site.Controllers
             return targetFileName;
 
 		}
+
+
+
+
     }
 }
