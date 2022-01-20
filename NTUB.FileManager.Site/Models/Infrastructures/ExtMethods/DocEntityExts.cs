@@ -26,7 +26,8 @@ namespace NTUB.FileManager.Site.Models.Infrastructures.ExtMethods
 				Id=source.Id,
 				Title = source.Title,
 				Description = source.Description,
-				ModifiedTime = source.ModifiedTime
+				ModifiedTime = source.ModifiedTime,
+				FileName = source.FileName,
 
 			};
 	}

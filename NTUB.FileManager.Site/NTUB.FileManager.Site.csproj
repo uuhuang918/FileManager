@@ -185,6 +185,7 @@
     <Content Include="Views\Docs\Create.cshtml" />
     <Content Include="Views\Docs\Index.cshtml" />
     <Content Include="Views\Docs\Edit.cshtml" />
+    <Content Include="Views\Docs\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

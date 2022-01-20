@@ -22,6 +22,17 @@ namespace NTUB.FileManager.Site.Controllers
             repository = new DocRepository();
 		}
         // GET: Docs
+
+        public ActionResult Index2()
+        {
+            var data = repository
+                .Search(null,null)
+                .Select(x => x.ToIndexVM());
+
+            return View(data);
+        }
+
+
         public ActionResult Index(string title,string description)
         {
             var data = repository

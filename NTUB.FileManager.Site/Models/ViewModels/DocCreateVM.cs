@@ -71,6 +71,7 @@ namespace NTUB.FileManager.Site.Models.ViewModels
 	public	class DocIndexVM
 	{
 		public int Id { get; set; }
+		public string FileName { get; set; }
 
 		[Display(Name = "標題")]
 		public string Title { get; set; }
